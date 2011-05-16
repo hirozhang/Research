@@ -1,0 +1,25 @@
+* { margin:0; padding:0;}
+body { font:10px Tahoma, Geneva, sans-serif; background:#eee;}
+
+#container { width:430px; margin:10px;}
+	
+	#write { border:none; width:410px; height:120px; background:#fff; padding:5px; margin-bottom:5px; -moz-border-radius:5px; -webkit-border-radius:5px; border:1px solid #f9f9f9; font-size:11px;}
+		
+		#keyboard { list-style:none;}
+			#keyboard li { float:left; width:20px; height:20px; line-height:20px; text-align:center; background:#fff; margin:0 5px 5px 0; -moz-border-radius:5px; -webkit-border-radius:5px; border:1px solid #f9f9f9;}
+			
+			.tab, .capslock, .left-shift, .space { clear:left;}
+			
+			#keyboard li.lastitem { margin-right:0;}
+			#keyboard li.delete { width:70px;}
+			#keyboard li.tab { width:70px;}
+			#keyboard li.capslock { width:75px;}
+			#keyboard li.enter { width:40px;}
+			#keyboard li.left-shift { width:80px;}
+			#keyboard li.right-shift { width:65px;}
+			#keyboard li.space { width:420px;}
+			
+			#keyboard li:hover, .hover { position:relative; top:1px; left:1px; cursor:pointer; border-color:#e5e5e5;}
+			
+			.on { display:none;}
+			.uppercase { text-transform:uppercase;}

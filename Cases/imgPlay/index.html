@@ -1,0 +1,96 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>Images Play</title>
+	
+	<script type="text/javascript" src="../js/jquery-1.3.2.min.js"></script>
+	<script type="text/javascript">
+		/* start ----- play img*/
+		var curr = 0, next = 0, count = 0;
+		$(document).ready(function() {	
+			count = $('#img_list a').size();	
+			
+			t = setInterval('imgPlay()', 3000);
+			
+			$('#imgs li, #img_list a').hover(function() {
+				clearInterval(t);
+			}, function() {
+				t = setInterval('imgPlay()', 3000);
+			});
+
+
+            
+			
+			$('#img_list a').click(function() {
+				var index = $('#img_list a').index(this);
+				if(curr != index) {
+					play(index);
+					curr = index;
+				};
+				return false;
+			});
+			
+		});
+		
+		var imgPlay = function() {
+			next = curr + 1;
+			if(curr == count-1) next=0;
+			play(next);
+			
+			curr++;
+			if(curr > count-1) { curr=0; next = curr +1; }
+		};
+		
+		var play = function(next) {
+			$('#imgs li').eq(curr).css({'opacity': '0.5'}).animate({'left': '-500px', 'opacity': '1'}, 'slow', function() {
+										 	$(this).css({'left': '490px'});
+										 }).end()
+									 .eq(next).animate({'left': '0px', 'opacity': '1'}, 'slow', function() {
+										 	$('#img_list a').siblings('a').removeClass('active').end().eq(next).addClass('active');
+										 });
+		};
+		/* endof ----- play img*/
+	</script>
+	
+	<style type="text/css">
+		* { margin:0; padding:0;}
+		body { font:12px; padding:100px 200px;}
+		ul { list-style:none;}
+		img { padding:2px; border:1px solid #eee;}
+		a { outline:none;}
+		
+		#imgs { width:500px; float:left; margin-bottom:10px;}
+		.top, .btm { background:url(images/sprite.gif) no-repeat; overflow:hidden;}
+		.top { background-position:0 0; height:5px;}
+		.btm { background-position:0 -5px; height:7px;}
+		.mid { width:486px; background:url(images/bg_img.gif) repeat-y; padding:5px 7px 0;}
+		.mid ul { width:486px; height:186px; background:#fff; position:relative; overflow:hidden;}
+		.mid ul li { width:486px; height:186px; position:absolute; left:490px; top:0;}
+		.mid ul li.first { left:0;}
+		#img_list { width:486px; height:20px; padding-top:5px; overflow:hidden; height:1%;}
+		#img_list a { display:block; width:14px; height:14px; text-indent:-9999px; float:left; margin-right:5px; background:url(images/sprite.gif) no-repeat 0 -13px;}
+		#img_list a:hover, #img_list a.active { background-position:-14px -13px;}
+	</style>
+</head>
+<body>
+		<div id="imgs">
+        <div class="top"></div>
+        <div class="mid">
+            <ul>
+                <li class="first"><a href="#"><img src="images/1.jpg" alt="1" /></a></li>
+                <li><a href="#"><img src="images/2.jpg" alt="2" /></a></li>
+                <li><a href="#"><img src="images/3.jpg" alt="3" /></a></li>
+                <li><a href="#"><img src="images/4.jpg" alt="4" /></a></li>
+            </ul>
+            <div id="img_list">
+            	<a href="#1" class="active">1</a>
+            	<a href="#2">2</a>
+            	<a href="#3">3</a>
+            	<a href="#4">4</a>
+            </div>
+        </div>
+        <div class="btm"></div>
+    </div>
+</body>
+</html>

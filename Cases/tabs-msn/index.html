@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Tabs like MSN</title>
+
+	<style type="text/css">
+	* { margin:0; padding:0;}
+	body { font:12px "宋体"; color:#049; padding:8px;}
+	a { text-decoration:none; color:#049;}
+	a:hover { text-decoration:underline;}
+	ul { list-style:none;}
+	li { height:23px; line-height:23px;}
+	
+	.popular { width:298px; border:1px solid #ace; padding-bottom:10px;}
+		
+		.tabs { overflow:hidden; height:1%;}
+			.tabs li { border:1px solid #ace; border-width:0 1px 1px 0; background:#f1f7fc; width:84px; text-align:center; float:left;}
+			.tabs li.active { background:#fff; border-bottom-color:#fff; font-weight:bold;}
+			.tabs li.tab-r { border-right:0; width:118px; text-align:right; padding-right:10px;}
+				.tabs li.tab-r a { color:#F06; font-weight:bold; font-family:Georgia;}
+		
+		.list { margin:7px 0 0 7px; padding-left:35px; background:url(popularlist.gif) no-repeat;}
+		
+		.weeklyPopular { display:none;}
+	</style>
+    
+    <script type="text/javascript" src="../js/jquery-1.3.2.min.js"></script>
+    <script type="text/javascript">
+		$(document).ready(function() {
+			$('a').attr('target', '_blank');   
+								   
+			$('.tabs li').mousemove(function() {
+				//最右边的tab不进行任何操作							 
+				if($(this).hasClass('tab-r')) {
+					return;
+				};
+				//添加当前激活的状态
+				$(this).siblings().removeClass('active').end()
+						.addClass('active');
+				//切换tab		
+				if($(this).hasClass('tab-0')) {
+					$('.list').hide();
+					$('.dairyPopular').show();	
+					//也可以写成$(this).parent().nextAll('ul:eq(0)').show();,这样的好处是不必制定特定的class类
+				} else if($(this).hasClass('tab-1')) {
+					$('.list').hide();
+					$('.weeklyPopular').show();
+					//也可以写成$(this).parent().nextAll('ul:eq(1)').show();,这样的好处是不必制定特定的class类
+				};
+			});
+		});
+	</script>
+    
+</head>
+<body>
+<div class="popular">
+  <ul class="tabs">
+    <li class="tab-0 active">日点击</li>
+    <li class="tab-1">周点击</li>
+    <li class="tab-r"><a href="http://www.ihiro.org/">www.ihiro.org</a></li>
+  </ul>
+  <ul class="dairyPopular list">
+    <li><a title="刘翔头号粉丝已见过飞人父母 深得翔妈喜欢" href="http://msn.sports.ynet.com/view.jsp?oid=53541473">刘翔头号粉丝已见过飞人父母 深得翔妈喜欢</a></li>
+    <li><a title="霍启刚如何赢田亮趁虚而入 为何偏爱郭晶晶" href="http://msn.sports.ynet.com/view.jsp?oid=53527614">霍启刚如何赢田亮趁虚而入 为何偏爱郭晶晶</a></li>
+    <li><a title="言承旭首度自爆与林志玲恋情：她曾真的爱我" href="http://msn.ent.ynet.com/view.jsp?oid=53541753">言承旭首度自爆与林志玲恋情：她曾真的爱我</a></li>
+    <li style=""><a title="宋祖英鸟巢开唱周董跑调 多明戈朗朗吻玉手" href="http://msn.ent.ynet.com/view.jsp?oid=53541724">宋祖英鸟巢开唱周董跑调 多明戈朗朗吻玉手</a></li>
+    <li style=""><a title="伏明霞暴肥现身香港中环 凸肚素颜头发凌乱" href="http://msn.ent.ynet.com/view.jsp?oid=53543086">伏明霞暴肥现身香港中环 凸肚素颜头发凌乱</a></li>
+    <li><a title="暗夜中的天使 与雪佛兰大黄蜂的艳遇记" href="http://ad.cn.doubleclick.net/clk%3B215572633%3B37880853%3Bp?http://auto.msn.com.cn/auto_international/history/carslide/220899.shtml">暗夜中的天使 与雪佛兰大黄蜂的艳遇记</a></li>
+    <li><a title="油价涨到史上最贵 13款省油车替君分忧(第1页)" href="http://auto.msn.com.cn/auto_guide/topic/2009/6/30/220916.shtml">油价涨到史上最贵 13款省油车替君分忧(第1页)</a></li>
+    <li><a title="别为省油毁了爱车 常见驾驶误区6条(第1页)" href="http://auto.msn.com.cn/auto_diy/tips/2009/7/1/220944.shtml">别为省油毁了爱车 常见驾驶误区6条(第1页)</a>&nbsp;&nbsp;</li>
+    <li><a title="百公里油耗不到7L  7款1.6L以下省油车(第1页)" href="http://auto.msn.com.cn/auto_guide/topic/2009/7/1/220968.shtml">百公里油耗不到7L  7款1.6L以下省油车(第1页)</a></li>
+  </ul>
+  <ul class="weeklyPopular list">
+    <li><a title="最全体坛女星素颜照 生活中真实一面最可爱" href="http://msn.sports.ynet.com/pic.jsp?oid=53507789">最全体坛女星素颜照 生活中真实一面最可爱</a></li>
+    <li><a title="王宝强赶工薯片充饥 女友逛街怒视记者偷拍" href="http://msn.ent.ynet.com/view.jsp?oid=53507578">王宝强赶工薯片充饥 女友逛街怒视记者偷拍</a></li>
+    <li><a title="昔日歌王迈克尔-杰克逊去世 终年50岁(图)" href="http://msn.ent.ynet.com/view.jsp?oid=53368359">昔日歌王迈克尔-杰克逊去世 终年50岁(图)</a></li>
+    <li><a title="侯耀文骨灰两年未入土 两女儿争8000万遗产" href="http://msn.ent.ynet.com/view.jsp?oid=53368876">侯耀文骨灰两年未入土 两女儿争8000万遗产</a></li>
+    <li><a title="马伊琍产后上围猛增露副乳 沈傲君婚后发福" href="http://msn.ent.ynet.com/view.jsp?oid=53474704">马伊琍产后上围猛增露副乳 沈傲君婚后发福</a></li>
+    <li><a title="刘翔头号粉丝已见过飞人父母 深得翔妈喜欢" href="http://msn.sports.ynet.com/view.jsp?oid=53541473">刘翔头号粉丝已见过飞人父母 深得翔妈喜欢</a></li>
+    <li><a title="美国少妇12年44次整容 整成真人版芭比(图)" href="http://msn.tech.ynet.com/view.jsp?oid=53509429">美国少妇12年44次整容 整成真人版芭比(图)</a></li>
+    <li><a title="员工偷嘴曝丑闻：家乐福卤味损毁率接近三成" href="http://msn.china.ynet.com/view.jsp?oid=53508037">员工偷嘴曝丑闻：家乐福卤味损毁率接近三成</a></li>
+    <li><a title="谭维维恋情曝光月下牵手 甜蜜依偎两人同居" href="http://msn.ent.ynet.com/view.jsp?oid=53486906">谭维维恋情曝光月下牵手 甜蜜依偎两人同居</a></li>
+  </ul>
+</div>
+</body>
+</html>

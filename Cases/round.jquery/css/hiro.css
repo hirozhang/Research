@@ -1,0 +1,25 @@
+/* ----- RESET ----- */
+html,body,div,ul,ol,li,dl,dt,dd,h1,h2,h3,h4,h5,h6,pre,form,p,blockquote,fieldset,input { margin:0; padding:0;}
+body { font:12px/18px  Verdana, Geneva, sans-serif, "宋体"; color:#000;}
+ul { list-style:none;}
+a { text-decoration:none; outline:none;}
+
+#layout { width:960px; margin:0 auto; padding:100px; overflow:hidden;}
+
+	.round { width:150px; padding:10px 20px 20px; margin-bottom:10px;}
+	.round h1{font-size:16px; padding:10px 0; color:#fff; font-weight:normal;}
+	.round ul li { color:#E6E6E6; text-indent:20px; padding:3px 0 3px 2px; border-bottom:1px dashed #ccc;}
+	.round ul li a { color:#E6E6E6; display:block;}
+	.round ul li a:hover { font-size:13px;}
+	
+	.round_blue { background:#275ba1;}
+	.round_blue h1, .round_blue ul li { border-bottom:1px dashed #004eb8;}
+	.round_blue ul li a:hover { background:#4777b6;}
+
+	.round_purple { background:#9132AF;}
+	.round_purple h1, .round_purple ul li { border-bottom:1px dashed #ae40d1;}
+	.round_purple ul li a:hover { background:#a958c2;}
+	
+	.round_grey { background:#696767;}
+	.round_grey h1, .round_grey ul li { border-bottom:1px dashed #877e7e;}
+	.round_grey ul li a:hover { background:#918f8f;}

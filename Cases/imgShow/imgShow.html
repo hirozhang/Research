@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Untitled Document</title>
+<style type="text/css">
+	* { margin:0;}
+	body { padding:50px;}
+	#img { position:relative; width:140px; height:105px; overflow:hidden;}
+	#img img { position:absolute; top:0; left:140px;}
+	#img img.curr { z-index:1; left:0;}
+</style>
+</head>
+
+<body>
+	<div id="img">
+    	<img src="1.jpg" class="curr" alt="" />
+    	<img src="2.jpg" alt="" />
+    	<img src="3.jpg" alt="" />
+    	<img src="4.jpg" alt="" />
+    	<img src="5.jpg" alt="" />
+    </div>
+    <script type="text/javascript" src="1.44.js"></script>
+    <script type="text/javascript">
+		jQuery(function($) {
+			var size = $('#img img').size(),
+				next = 0,
+				show = function() {
+					next = (next >= size-1) ? 0 : ++next;
+					
+					/*$('#img img').filter('.curr').fadeOut().removeClass('curr')
+								.parent().find('img').eq(next).fadeIn().addClass('curr');*/
+					$('#img img').filter('.curr')
+							.animate({'left': '-140px'}, function() {
+								$(this).removeClass('curr').css('left', '140px');
+							});
+					$('#img img').eq(next)
+								.animate({'left': 0}, function() {
+									$(this).addClass('curr');
+								});
+				};
+				
+			var t = setInterval(show, 3000);
+			$('#img img').hover(function() {
+				clearInterval(t);
+			}, function() {
+				t = setInterval(show, 3000);
+			});
+		});
+	</script>
+</body>
+</html>
