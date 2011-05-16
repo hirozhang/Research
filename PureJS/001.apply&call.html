@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>apply() | call()</title>
+</head>
+
+<body>
+<script type="text/javascript">
+function sum(arg1, arg2) {
+	return arg1+arg2;
+}
+
+function applySum(arg1, arg2) {
+	return sum.apply(this, arguments);
+}
+function applySum1(arg1, arg2) {
+	return sum.apply(this, [arg1, arg2]);
+}
+
+function callSum(arg1, arg2) {
+	return sum.call(this, arg1, arg2);
+}
+
+function callSum2(arg1, arg2, arg3) {
+	return callSum.call(this, arg1+arg2, arg3);
+}
+
+console.log(sum(1, 2));
+
+console.log(applySum(5, 2));
+console.log(applySum1(5, 3));
+
+console.log(callSum(5, 5));
+console.log(callSum2(10, 10, 10));
+
+
+var color = 'red';
+var o = {'color': 'blue'};
+function sayColor() {
+	return this.color;
+}
+console.log(sayColor());
+o.sayColor = sayColor;
+console.log(o.sayColor());
+
+console.log('\n');
+
+o.sayColor = null;
+
+console.log('sayColor.call(window): ' + sayColor.call(window));
+console.log('sayColor.call(this): ' + sayColor.call(this));
+console.log('sayColor.call(o): ' + sayColor.call(o));
+
+console.log('\n');
+
+console.log('sayColor.apply(window): ' + sayColor.apply(window));
+console.log('sayColor.apply(this): ' + sayColor.apply(this));
+console.log('sayColor.apply(o): ' + sayColor.apply(o));
+
+</script>
+</body>
+</html>

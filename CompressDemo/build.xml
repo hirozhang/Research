@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project name="Javascript compress project" basedir="." default="yui-compress">
+    <property name="SRC_JS" value="${basedir}/src/js"/>
+    <property name="COMPRESSED_JS" value="${basedir}/js"/>
+    <property name="SRC_CSS" value="${basedir}/src/css"/>
+    <property name="COMPRESSED_CSS" value="${basedir}/css"/>
+	<property name="inputencoding" value="utf-8"/>
+	<property name="outputencoding" value="gbk"/>
+ 
+    <!--compress js file by YUI compressor-->
+    <target name="yui-compress" depends="concat-css">
+    	<!-- YUI JS Compress -->
+		<property name="yui.compress" value="${basedir}/lib/yuicompressor-2.4.2.jar" />  
+        <apply executable="java" parallel="false" verbose="true" dest="${COMPRESSED_JS}" taskname="js.yui.compile">
+			<fileset dir="${SRC_JS}">
+				<include name="*.js"/>
+			</fileset>
+			<arg line="-jar"/>
+			<arg path="${yui.compress}" />  
+			<arg line="--type js --charset UTF-8 -o" />
+			<mapper type="glob" from="*.js" to="*-yui-min.js" />
+			<targetfile />
+		</apply>
+    	<!-- YUI CSS Compress -->
+    	<apply executable="java" parallel="false" verbose="true" dest="${COMPRESSED_CSS}" taskname="css.yui.compile">
+			<fileset dir="${SRC_CSS}">
+				<include name="*.css"/>
+			</fileset>
+			<arg line="-jar"/>
+			<arg path="${yui.compress}" />  
+			<arg line="--type css --charset UTF-8 -o" />
+			<mapper type="glob" from="*.css" to="*-yui-min.css" />
+			<targetfile />
+		</apply>
+    </target>
+ 	
+	<!-- Contact all JS files -->
+	<target name="concat-js">
+        <concat destfile="${COMPRESSED_JS}/all.min.js" encoding="${inputencoding}" outputencoding="${outputencoding}">
+            <fileset dir="${COMPRESSED_JS}">
+            	<include name="*.js"/>	
+            	<exclude name="*.css"/>
+            </fileset>
+        </concat>
+    </target>
+	
+	<!-- Contact all CSS files -->
+	<target name="concat-css">
+        <concat destfile="${COMPRESSED_CSS}/all.min.css" encoding="${inputencoding}" outputencoding="${outputencoding}">
+            <fileset dir="${COMPRESSED_CSS}">
+            	<include name="*.css"/>	
+            	<exclude name="*.js"/>
+            </fileset>
+        </concat>
+    </target>
+	
+	<!--compress js file by Google Closure Compiler-->
+    <target name="google-compress" depends="concat-js">
+    	<!-- Google JS Compress -->
+	    <property name="google.compress" value="${basedir}/lib/g-closure-compiler.jar" />  
+        <apply executable="java" parallel="false" verbose="true" dest="${COMPRESSED_JS}" taskname="js.google.compile">
+			<fileset dir="${SRC_JS}">
+				<include name="*.js"/>
+			</fileset>
+			<arg line="-jar"/>
+			<arg path="${google.compress}" />  
+			<arg line="--js" />
+			<srcfile/>
+			 <arg line="--js_output_file"/>
+			 <mapper type="glob" from="*.js" to="*-gcc-min.js" />
+			<targetfile />
+		</apply>
+    </target>
+ 
+	<!--target name="clean">
+        <delete dir="${build}"/>
+    </target-->
+</project>
