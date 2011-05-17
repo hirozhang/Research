@@ -1,0 +1,52 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title></title>
+<style type="text/css">
+* { margin:0; padding:0;}
+body { background:#000;}
+
+#box { height:300px; width:500px; background:#fff; margin:50px auto; border:1px solid #ccc;
+    background: -webkit-gradient(linear, 0 100%, 0 0, from(#ededed), to(#fff));
+    background: -moz-linear-gradient(50% 100%, #ededed 0%, #fff 100%);
+    *background: #fff; filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FFFFFFFF', endColorstr='#FFEDEDED');
+    -webkit-box-shadow: rgba(0,0,0,0.3) 0 1px 3px;
+    -moz-box-shadow: rgba(0,0,0,0.3) 0 1px 3px;
+    box-shadow: rgba(0,0,0,0.3) 0 1px 3px;
+}
+#box:hover {
+    background: -webkit-gradient(linear, 0 100%, 0 0, from(#e8e8e8), to(#fcfcfc));
+	background: -moz-linear-gradient(50% 100%, #e8e8e8 0%, #fcfcfc 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FFFCFCFC', endColorstr='#FFE8E8E8');
+}
+
+.round { border-radius:20px; -moz-border-radius:20px; -webkit-border-radius:20px;}
+
+.img { display:block; width:256px; height:256px; background:url(2080661177.png) no-repeat; margin:0 auto;}
+</style>
+</head>
+<body>
+
+<div id="box" class="round">
+</div>
+
+
+<a href="#pngimg" class="img"></a>
+<a href="#pngimg" class="img"></a>
+
+<script type="text/javascript" src="../js/jquery-1.5.min.js"></script>
+<!--[if lte IE8]>
+<script type="text/javascript" src="corner.min.js"></script>
+<script type="text/javascript">
+    $('.round').corner('20px');
+</script>
+<![endif]-->
+<!--[if lte IE6]>
+<script type="text/javascript" src="pngfix.js"></script>
+<script type="text/javascript">
+    $('.img').fixPNG();
+</script>
+<![endif]-->
+</body>
+</html>

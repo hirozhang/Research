@@ -1,0 +1,41 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>Popbox Demo</title>
+    <style type="text/css">
+        * { margin:0; padding:0;}
+    </style>
+</head>
+<body style="height:1200px; padding:400px 0 0 400px;">
+    <a href="#" id="demoAnchor">Click</a>
+    使用方法: 只需要在head里引入do.js文件
+view sourceprint?
+1	<script src="../do.min.js"></script> (3.5k)
+Demo 1: 执行inline script
+Click Here.
+view sourceprint?
+1	Do(function(){
+2	    $('#demo1 a').click(function(e){
+3	        e.preventDefault();
+4	        $(this).animate({fontSize: '24px', fontWeight: 800}, 1000).fadeOut(1000);
+5	    });
+6	});
+Demo 2: 依赖外部文件
+Mouseover Here.
+view sourceprint?
+1	Do('js/tip.js', function(){
+2	    $('#demo2 a').simpleTip();
+3	});
+<script type="text/javascript" src="../js/jquery-1.5.min.js"></script>
+<script type="text/javascript" src="pb.js"></script>
+<script type="text/javascript">
+    jQuery(function($) {
+        $('#demoAnchor').click(function(e) {
+            e.preventDefault();
+            $(this).popbox('标题','内容', {scrollSpeed : 200, fadeSpeed : 200});
+        });
+    });
+</script>
+</body>
+</html>

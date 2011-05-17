@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Untitled Document</title>
+</head>
+
+<body>
+	<div id="time_last"><label class="days">1</label> 天 <label class="hours">03</label> 小时 <label class="minutes">04</label> 分 <label class="seconds">04</label> 秒</div>
+    
+    <script type="text/javascript" src="../../JsSrc/js/jquery-1.4.4.min.js"></script>
+    <script type="text/javascript">
+	function countdownTimer() {
+		var $time = $('#time_last');
+		if(!$time.size()) {
+			return false;
+		};
+		var	$days = $('.days', $time),
+			$hours = $('.hours', $time),
+			$minutes = $('.minutes', $time),
+			$seconds = $('.seconds', $time),
+			format = function(time) {
+				return time < 10 ? '0' + time : time;
+			},
+			alter = function($obj, time, flag) {
+				if(time >= 0) {
+					time = flag ? time : format(time);
+					$obj.text(time);
+				};
+			},
+			t = setInterval(function() {
+				var seconds = parseInt($seconds.text(), 10);
+					minutes = 0, hours = 0, days = 0;
+				
+				seconds--;
+				if(seconds < 0) {
+					minutes = parseInt($minutes.text(), 10)
+					minutes--;
+					if(minutes < 0) {
+						hours = parseInt($hours.text(), 10);
+						hours--;
+						if(hours < 0) {
+							days = parseInt($days.text());
+							days--;
+							if(days >= 0) {
+								hours = 23;
+							};
+							alter($days, days, true);
+						};
+						if(hours >= 0) {
+							minutes = 59;
+						};
+						alter($hours, hours);
+					};
+					if(minutes >= 0) {
+						seconds = 59;
+					};
+					alter($minutes, minutes);
+				};
+				alter($seconds, seconds);
+				
+				if(seconds < 0 && minutes < 0 && hours < 0 && days < 0) {
+					clearInterval(t);
+				};
+			}, 1000);
+	};
+	countdownTimer();
+	</script>
+</body>
+</html>

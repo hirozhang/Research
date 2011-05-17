@@ -1,0 +1,145 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Calendar</title>
+<style type="text/css">
+* { margin:0; padding:0;}
+body { padding:50px;}
+li { list-style:none;}
+#cal_bar { margin-top:20px; overflow:hidden; height:1%; width:701px; height:25px; line-height:25px; background:#eee;}
+#cal_bar span { display:block; float:left; width:100px; text-align:center; font-size:12px;}
+#cal_ls { overflow:hidden; height:1%; width:700px; border:1px solid #dadada; border-width:1px 0 0 1px;}
+#cal_ls li { float:left; width:99px; border:1px solid #dadada; border-width:0 1px 1px 0; text-align:center; height:22px; line-height:22px; font-size:14px;}
+#cal_ls .psFix { color:#ccc;}
+#cal_ls .curr { color:#f00;}
+</style>
+</head>
+
+<body>
+<p><a href="#" id="prev">prev</a><span id="date">2010年12月30号</span><a href="#" id="next">next</a></p>
+<p id="cal_bar"><span>星期日</span><span>星期一</span><span>星期二</span><span>星期三</span><span>星期四</span><span>星期五</span><span>星期六</span></p>
+<ul id="cal_ls"></ul>
+
+<script type="text/javascript" src="../../JsSrc/js/jquery-1.4.4.min.js"></script>
+<script type="text/javascript" src="getWeek.js"></script>
+<script type="text/javascript">
+jQuery(function() {
+	/*	蔡勒（Zeller）公式：w=y+[y/4]+[c/4]-2c+[26(m+1)/10]+d-1
+		
+		公式中的符号含义如下，w：星期；c：世纪-1；y：年（两位数）；m：月（m 大于等于3，小于等于14，即在蔡勒公式中，某年的1、2月要看作上一年的13、14月来计算，比如2003年1月1日要看作2002年的13月1日来计算）；d：日；[ ]代表取整，即只要整数部分。(C是世纪数减一，y是年份后两位，M是月份，d是日数。1月和2月要按上一年的13月和 14月来算，这时C和y均按上一年取值。)
+
+		算出来的W除以7，余数是几就是星期几。如果余数是0，则为星期日。
+		
+		以2049年10月1日（100周年国庆）为例，用蔡勒（Zeller）公式进行计算，过程如下：
+		蔡勒（Zeller）公式：w=y+[y/4]+[c/4]-2c+[26(m+1)/10]+d-1
+		=49+[49/4]+[20/4]-2×20+[26× (10+1)/10]+1-1
+		=49+[12.25]+5-40+[28.6]
+		=49+12+5-40+28
+		=54 (除以7余5)
+		即2049年10月1日（100周年国庆）是星期5。	 
+		http://www.cnblogs.com/chingho/archive/2010/03/26/1697282.html
+	*/
+	
+	var months = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+	var getMCount = function(y, m) {	//获得每月天数
+			if(y % 4 == 0) {	//闰年的二月为29天
+				months[1] = 29;
+			};
+			return months[m - 1];
+		},
+		getWeek = function(y, m, d) {	//获得指定日的星期数
+			var _int = parseInt,
+				c = _int(y/100);
+			y = y.toString().substring(2, 4);
+			y = _int(y, 10);
+			if(m === 1) {
+				m = 13;
+				y--;
+			} else if(m === 2) {
+				m = 14;
+				y--;
+			};
+						
+			var w = y + _int(y/4) + _int(c/4) - 2*c + _int(26*(m+1)/10) + d - 1;
+			w = w%7;
+			
+			return w >= 0 ? w : w+7;
+		}, 
+		getFixHtml = function(y, m, d, flag) {//获得前、后缀日历列表
+			var w = getWeek(y, m, 1),
+				html = '',
+				pMCount = (m === 1 ? getMCount(y--, 12) : getMCount(y, m-1)),	//获取上个月的天数，若当前月为1月，取上一年的12月
+				prefCount = pMCount - w + 1, //上月的尾数
+				suffCount = 42 - getMCount(y, m) - w, //下月的开数
+				start, end;
+			
+			if(flag === 'pref') {
+				start = prefCount;
+				end = pMCount;
+			} else if(flag === 'suff') {
+				start = 1;
+				end = suffCount;
+			};
+			for(var i=start; i<=end; i++) {
+				html += '<li class="psFix">'+ i +'</li>';
+			};
+			
+			return html;
+		},
+		getCalList = function(year, month, day) {	//渲染日历列表
+			var mCount = getMCount(year, month);
+			
+			var html = getFixHtml(year, month, 1, 'pref');
+			for(var i=1; i <= mCount; i++) {
+				switch (i) {
+					case day:
+						html += '<li class="curr">';	//当前日
+						break;
+					default:
+						html += '<li>';
+				};
+				html += i +'</li>'
+			};
+			html += getFixHtml(year, month, 1, 'suff');
+			return html;
+		};
+	
+	var $date = $('#date'),
+		date = $date.text(),
+		year = parseInt(date.substring(0,4)),
+		month = parseInt(date.substring(5,7), 10),
+		day = date.substring(8,10);
+	
+	$('#prev, #next').click(function(event) {
+		event.preventDefault();
+		var now = new Date(),
+			nowY = now.getFullYear(),
+			__this = this;
+		
+		if(__this.id === 'prev') {	//上月
+			month--;
+			if(month < 1) {	//若小于1，表示到了上一年
+				month = 12;
+				year--;
+			};
+		} else if(__this.id === 'next') {	//下月
+			month++;
+			if(month > 12) {	//若大于12，表示到了下一年
+				month = 1;
+				year++;
+			};
+			if(year >= nowY) {	//当前导航到的日期等于当前日期时，不可再点下
+				return false;
+			};
+		};
+
+		$date.text(year + '年' + (month<10 ? ('0' + month) : month) + '月' + day + '日');
+		$('#cal_ls').html(getCalList(year, month, parseInt(day, 10)));
+	});
+	
+	$('#cal_ls').html(getCalList(year, month, parseInt(day, 10)));
+});
+</script>
+</body>
+</html>

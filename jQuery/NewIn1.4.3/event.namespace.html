@@ -1,0 +1,25 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>event.namespace -- New in jQuery 1.4.3</title>
+</head>
+
+<body>
+
+<button>display event.namespace</button>
+<p></p>
+
+<script type="text/javascript" src="../js/jquery-1.4.3.min.js"></script>
+<script type="text/javascript">
+$("p").bind("something.test", function(event) {
+  alert( event.namespace );
+});
+$("button").click(function(event) {
+  $("p").trigger("something.test");
+});  
+</script>
+
+
+</body>
+</html>

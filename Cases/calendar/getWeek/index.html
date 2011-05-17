@@ -1,0 +1,30 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>获得指定日期的星期数</title>
+</head>
+
+<body style="text-align:center;">
+
+<p style="margin-bottom:20px;">
+输入合理的日期格式:'2010,12,30'
+<input type="text" id="year" value="2010" size="4" />&nbsp;<input type="text" id="month" value="12" size="2" />&nbsp;<input type="text" id="day" value="30" size="2" /><button id="getWeek">获取</button>
+</p>
+
+<p>万年历:<a href="http://www.lzsq.net/wnl.htm" target="_blank">http://www.lzsq.net/wnl.htm</a>，可以去验证下。</p>
+<script type="text/javascript" src="getWeek.js"></script>
+<script type="text/javascript">
+var doc = document,
+	btn = doc.getElementById('getWeek'),
+	y = doc.getElementById('year'),
+	m = doc.getElementById('month'),
+	d = doc.getElementById('day'),
+	_int = parseInt;
+	
+btn.onclick = function() {
+	alert(getWeek(_int(y.value), _int(m.value), _int(d.value)));
+};
+</script>
+</body>
+</html>

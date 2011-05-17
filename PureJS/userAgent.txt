@@ -1,0 +1,11 @@
+ie:
+Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 5.1; Trident/4.0; 3M/IE 6.0;; 3M/MSIE 6.0;; .NET CLR 1.1.4322; .NET CLR 2.0.50727; .NET CLR 3.0.4506.2152; .NET CLR 3.5.30729; InfoPath.1; 3M/MSIE 8.0;) 
+
+ff:
+Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.9.2.8) Gecko/20100722 Firefox/3.6.8 (.NET CLR 3.5.30729)
+
+op:
+Opera/9.80 (Windows NT 5.1; U; zh-cn) Presto/2.6.30 Version/10.61
+
+sf:
+Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US) AppleWebKit/533.17.8 (KHTML, like Gecko) Version/5.0.1 Safari/533.17.8

@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>selectText And getSelectedText</title>
+</head>
+
+<body>
+
+
+<ul>
+
+	<li><input type="text" value="Hello World!" id="textbox" name="textbox" size="50" /></li>
+    
+    <li><input type="button" id="getSelectedBtn" value="getSelectedText" /></li>
+    
+    <li><label for="startIndex">开始位置：</label><input type="text" size="5" id="startIndex" name="startIndex" />&nbsp;&nbsp;&nbsp;&nbsp;<label for="stopIndex">结束位置：</label><input type="text" size="5" id="stopIndex" name="endIndex" /></li>
+
+	<li><input type="button" id="selectBtn" value="selectText" /></li>
+    
+</ul>
+
+<script type="text/javascript">
+var textbox = document.getElementById('textbox'),
+	getSelectedBtn = document.getElementById('getSelectedBtn'),
+	selectBtn = document.getElementById('selectBtn');
+	
+function getSelectedText(textbox) {
+	if(document.selection) {
+		return document.selection.createRange().text;
+	} else { //IE
+		return textbox.value.substring(textbox.selectionStart, textbox.selectionEnd);
+	};
+}
+
+function selectText(textbox) {
+	var startIndex = document.getElementById('startIndex').value, 
+		stopIndex = document.getElementById('stopIndex').value;
+	if(textbox.setSelectionRange) {
+		textbox.setSelectionRange(startIndex, stopIndex);
+	} else if(textbox.createTextRange) { //IE
+		var range = textbox.createTextRange();		//创建范围
+		range.collapse(true);				//折叠预选取范围到开始位置
+		range.moveStart('character', startIndex);		//将预选取范围的起点和终点移动到相同的位置
+		range.moveEnd('character', stopIndex - startIndex);		//选取字符长度
+		range.select();			//选取范围
+	alert(stopIndex);
+	}
+	textbox.focus();
+}
+
+getSelectedBtn.onclick = function() {
+	alert(getSelectedText(textbox));
+};
+selectBtn.onclick = function() {
+	selectText(textbox);
+};
+</script>
+
+</body>
+</html>

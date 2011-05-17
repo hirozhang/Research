@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Position Style Demo</title>
+<style type="text/css">
+* { margin:0; padding:0;}
+#wrapper { width:800px; margin:20px auto;}
+.container { height:40px; position:relative; border:1px solid #ccc; margin-bottom:15px;}
+.high { height:80px;}
+.box { width:300px; height:30px; border:1px solid #f60; background:#FFC; color:#090; font-size:12px; position:absolute;}
+code { display:block; font-style:italic; font-size:11px; color:#999;}
+.note { background:#f00; color:#fff; font-weight:bold; font-size:14px; text-align:center; border:1px solid #CC0; padding:5px 0; margin-bottom:10px;}
+h3 { font-size:14px; color:#666; margin-bottom:5px;}
+.o { background:#f60; color:#fff; font-size:11px;}
+
+#box1 { top:0; left:0;}
+#box2 { top:0; right:0;}
+#box3 { bottom:0; left:0;}
+#box4 { bottom:0; right:0;}
+
+#box5 { bottom:0; right:0; top:0;}
+#box6 { bottom:0; left:0; top:0;}
+#box7 { top:0; right:0; bottom:0;}
+#box8 { top:0; left:0; bottom:0;}
+
+#box9 { bottom:0; right:0; top:0; left:0;}
+#box10 { bottom:0; left:0; top:0; right:0;}
+#box11 { top:0; right:0; bottom:0; left:0;}
+#box12 { top:0; left:0; bottom:0; right:0;}
+
+</style>
+</head>
+
+<body>
+
+<div id="wrapper">
+	<p class="note">总结发现，position的位置样式读取顺序是:上->下->左->右(top-bottom-left-right)</p>
+    <p class="o">橙色背景的代码为理想读取代码...(最后两个设置的位置属性)</p>
+    <h3>第一组：两个位置样式</h3>
+	<div class="container high">
+        <div class="box" id="box1">左上：<code>#box1 { <span class="o">top:0; left:0;</span>}</code></div>
+        <div class="box" id="box2">右上：<code>#box2 { <span class="o">top:0; right:0;</span>}</code></div>
+        <div class="box" id="box3">左下：<code>#box3 { <span class="o">bottom:0; left:0;</span>}</code></div>
+        <div class="box" id="box4">右下：<code>#box4 { <span class="o">bottom:0; right:0;</span>}</code></div>
+    </div>
+    <h3>第二组：三个位置样式</h3>
+    <div class="container">
+        <div class="box" id="box5">理想是右上，结果是右上：<code>#box5 { bottom:0; <span class="o">right:0; top:0;</span>}</code></div>
+    </div>
+    <div class="container">
+        <div class="box" id="box6">理想是左上，结果是左上：<code>#box6 { bottom:0; <span class="o">left:0; top:0;</span>}</code></div>
+    </div>
+    <div class="container">
+        <div class="box" id="box7">理想是右下，结果是右上：<code>#box7 { top:0; <span class="o">right:0; bottom:0;</span>}</code></div>
+    </div>
+    <div class="container">
+        <div class="box" id="box8">结果是左下，结果是左上：<code>#box8 { top:0; <span class="o">left:0; bottom:0;</span>}</code></div>
+    </div>
+    <h3>第三组：四个位置样式</h3>
+    <div class="container">
+        <div class="box" id="box9">理想是左上，结果是左上：<code>#box9 { bottom:0; right:0; <span class="o">top:0; left:0;</span>}</code></div>
+    </div>
+    <div class="container">
+        <div class="box" id="box10">理想是右上，结果是左上：<code>#box10 { bottom:0; left:0; <span class="o">top:0; right:0;</span>}</code></div>
+    </div>
+    <div class="container">
+        <div class="box" id="box11">理想是左下，结果是左上：<code>#box11 { top:0; right:0; <span class="o">bottom:0; left:0;</span>}</code></div>
+    </div>
+    <div class="container">
+        <div class="box" id="box12">结果是右下，结果是左上：<code>#box12 { top:0; left:0; <span class="o">bottom:0; right:0;</span>}</code></div>
+    </div>
+    
+</div>
+
+</body>
+</html>

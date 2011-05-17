@@ -1,0 +1,58 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>Google Map Demo</title>
+    <style type="text/css">
+        * { margin:0; padding:0;}
+        #mapCanvas { height:400px; width:600px; margin:50px auto; border:2px solid #DB772C;}
+    </style>
+</head>
+<body>
+    <ul id="list">
+        <li><a href="?lat=31.28395,121.483612" onclick="locaPlace(this); return false;" title="Shanghai">Shanghai <br/>虹口区</a></li>
+        <li><a href="?lat=39.925851,116.405411" onclick="locaPlace(this); return false;" title="Beijing">Beijing 朝阳区</a></li>
+        <li><a href="?lat=23.176471,113.257599" onclick="locaPlace(this); return false;" title='Guangzhou'>Guangzhou 某某区</a></li>
+        <li><a href="?lat=35.439638,139.151916" onclick="locaPlace(this); return false;" title='神奈川县'>神奈川县秦野市三廻部</a></li>
+        <li><br/></li>
+        <li><a href="?lat=21.865138,-102.295525" onclick="locaPlace(this); return false;" title="COCINA SUCURSAL MATRIZ">
+            <b>DISTRIBUIDORA DEL CENTRO TODO PARA EQUIPAR SU COCINA SUCURSAL MATRIZ</b><br/>
+            MTZ. DMGZ., AV. MAHATMA GANDHI #250, AGUASCALIENTES</a>
+        </li>
+    </ul>
+
+    <div id="mapCanvas"></div>
+
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&language=en"></script>
+<script type="text/javascript">
+    function initialize(x, y, title, content) {
+      var myLatlng = new google.maps.LatLng(x,y);
+      var myOptions = {
+        zoom: 14,
+        center: myLatlng,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+      }
+      var map = new google.maps.Map(document.getElementById("mapCanvas"), myOptions);
+      var marker = new google.maps.Marker({
+          position: myLatlng,
+          map: map,
+          title:title
+      });
+      var infowindow = new google.maps.InfoWindow(
+      { content: '<style type="text/css">b { font-size:12px;}</style>'+content,
+            size: new google.maps.Size(100,100),
+            position: myLatlng
+      });
+      infowindow.open(map);
+    }
+    function locaPlace(anchor) {
+        var href = anchor.href,
+            lats = href.substring(href.indexOf('lat=') + 4),
+            lat = lats.split(','),
+            title = anchor.title,
+            content = anchor.innerHTML;
+        initialize(lat[0], lat[1], title, content);
+    }
+</script>
+</body>
+</html>

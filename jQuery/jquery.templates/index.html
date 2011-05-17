@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>jQuery.templates</title>
+
+	<script type="text/javascript" src="../js/jquery-1.4.3.min.js"></script>
+    <script type="text/javascript" src="jquery.tmpl.min.js"></script>
+</head>
+<body>
+<script id="demoTmpl" type="text/x-jquery-tmpl">
+	<li>
+		<img src="${imgSource}" alt="${userName}" />
+		<h2> ${username} </h2>
+		<p> ${tweet} : ${email}</p>
+		
+		{{if desc}}
+			<p> {{html desc}} </p>
+			<p> {{html $item.add("<strong>a", "b</strong>")}} </p>
+		{{/if}}
+	</li>
+</script>
+<ul id="demo"></ul>
+
+<script type="text/javascript">
+jQuery(function($) {
+	/*$('#demoTmpl').tmpl({
+		'username' : 'Hiro', 
+		'tweet' : 'http://www.twitter.com/hiro_zhang', 
+		'imgSource' : 'http://0.gravatar.com/avatar/a0d9455186ce7aecc659545e21651d00?s=24&d=&r=G',
+		'email' : 'hiro.zhd@gmail.com',
+		'desc' : '<a href="http://www.ihiro.org/" target="_blank">Hiro技术站</a>'
+	}).appendTo('#demo');*/
+	
+	$.post('data.php', function(demo) {
+		$('#demoTmpl').tmpl(demo, {
+			unencode : function(text) {	
+				//var text = this.data.desc;
+				alert(text);
+				text = text.replace(/&lt;/g, '<');
+				text = text.replace(/&gt;/g,  '>');
+				text = text.replace(/\//g,  '');
+				return text;
+			}, 
+			add : function(a, b) {
+				return a+b;
+			}
+		}).appendTo('#demo');
+	},'json');
+});
+</script>
+</body>
+</html>

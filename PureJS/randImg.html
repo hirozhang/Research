@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Untitled Document</title>
+</head>
+
+<body>
+<script type="text/javascript">
+(function() {	
+	var images=new Array();	
+	
+	images[0]=["images/countertops_banner_2010_2.jpg","China Country Site"];
+	
+	images[1]=["images/countertops_banner_2010_1.jpg","China Country Site"];
+	
+	images[2]=["images/countertops_banner_2010_3.jpg","China Country Site"];
+	
+	images[3]=["images/countertops_banner_2010_4.jpg","China Country Site"];
+	
+	
+	var len = images.length - 1,
+		index = parseInt(Math.random()*len);
+	document.write('<div id="randImg" style="position:relative; top:-271px; z-index:1"><img src="'+images[index][0]+'" alt="'+images[index][1]+'"></div>');
+
+		
+	var randImgBox = document.getElementById('randImg');
+	setInterval(function() {
+		index = parseInt(Math.random()*len);
+		randImgBox.innerHTML = '<img src="'+images[index][0]+'" alt="'+images[index][1]+'">';
+	}, 3000);
+})();	
+</script>
+</body>
+</html>

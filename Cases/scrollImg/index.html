@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title></title>
+    <style type="text/css">
+* { padding:0; margin:0;}
+body { text-align:center;}
+
+#photo-list {
+     /* 3张图片的宽度（包含宽度、padding、border、图片间的留白）
+         计算：3*(100+2*2+1*2+9) - 9
+         之所以减去9是第三张图片的右边留白
+     */
+    width:336px;
+    /* 图片的宽度（包含高度、padding、border）
+        计算：100+2*2+1*2
+    */
+    height:106px;
+    margin:50px auto; overflow:hidden;
+    border:1px dashed #ccc;
+}
+#photo-list ul { list-style:none;}
+#photo-list li { float:left; padding-right:9px;}
+#photo-list img { border:1px solid #ddd; background:#fff; padding:2px;}
+    </style>
+</head>
+<body>
+<div id="photo-list">
+    <ul id="scroll">
+        <li><a href="http://www.ihiro.org/intellij-idea"><img src="http://www.ihiro.org/blog/wp-content/uploads/2011/01/logo.jpg" width="100px" height="100px" alt=""/></a></li>
+        <li><a href="http://www.ihiro.org/javascript-getweek-by-date"><img src="http://www.ihiro.org/blog/wp-content/uploads/2010/12/calendar.jpg" width="100px" height="100px" alt=""/></a></li>
+        <li><a href="http://www.ihiro.org/beginning-python"><img src="http://www.ihiro.org/blog/wp-content/uploads/2010/12/beginning-python.jpg" width="100px" height="100px" alt=""/></a></li>
+        <li><a href="http://www.ihiro.org/css-position-hack"><img src="http://www.ihiro.org/blog/wp-content/uploads/2010/11/position-logo.jpg" width="100px" height="100px" alt=""/></a></li>
+        <li><a href="http://www.ihiro.org/text-range"><img src="http://www.ihiro.org/blog/wp-content/uploads/2010/11/text-range.jpg" width="100px" height="100px" alt=""/></a></li>
+        <li><a href="http://www.ihiro.org/html5-pro-ebook-recommendations"><img src="http://www.ihiro.org/blog/wp-content/uploads/2010/11/Pro_Html5_logo.jpg" width="100px" height="100px" alt=""/></a></li>
+        <li><a href="http://www.ihiro.org/jquery-plugin-recommended-maphighlight"><img src="http://www.ihiro.org/blog/wp-content/uploads/2010/10/maohightlight-logo.jpg" width="100px" height="100px" alt=""/></a></li>
+        <li><a href="http://www.ihiro.org/jquery-format-extend"><img src="http://www.ihiro.org/blog/wp-content/uploads/2010/09/jQuery.format_logo.png" width="100px" height="100px" alt=""/></a></li>
+        <li><a href="http://www.ihiro.org/information-september-2010-programming-language-list"><img src="http://www.ihiro.org/blog/wp-content/uploads/2010/08/2010.08.language-logo.jpg" width="100px" height="100px" alt=""/></a></li>
+        <li><a href="http://www.ihiro.org/example-selectbox-simulation"><img src="http://www.ihiro.org/blog/wp-content/uploads/2010/09/select_logo.png" width="100px" height="100px" alt=""/></a></li>
+    </ul>
+</div>
+<script type="text/javascript">
+var id = function(el) {
+        return document.getElementById(el);
+    },
+    c = id('photo-list');
+if(c) {
+    var	ul = id('scroll'),
+        lis = ul.getElementsByTagName('li'),
+        itemCount = lis.length,
+        width = lis[0].offsetWidth, //获得每个img容器的宽度
+        marquee = function() {
+            c.scrollLeft += 2;
+            if(c.scrollLeft % width <= 1){  //当 c.scrollLeft 和 width 相等时，把第一个img追加到最后面
+                ul.appendChild(ul.getElementsByTagName('li')[0]);
+                c.scrollLeft = 0;
+            };
+        },
+        speed = 50; //数值越大越慢
+
+    ul.style.width = width*itemCount + 'px'; //加载完后设置容器长度
+
+    var timer = setInterval(marquee, speed);
+    c.onmouseover = function() {
+        clearInterval(timer);
+    };
+    c.onmouseout = function() {
+        timer = setInterval(marquee, speed);
+    };
+};
+</script>
+</body>
+</html>
