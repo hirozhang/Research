@@ -1,0 +1,95 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>bodyClick</title>
+    <style type="text/css">
+    .posiBox { position: relative; margin: 1.5em 0}
+    .pop_con { display: none; width: 574px; padding:3px 12px; border:1px solid #aaa; background: #fff;
+        -moz-box-shadow:3px 3px 6px #ccc;
+        -webkit-box-shadow:3px 3px 6px #ccc;
+        box-shadow:3px 3px 6px #ccc;
+        -moz-border-radius:3px;
+        -webkit-border-radius:3px;
+        border-radius:3px;
+        position:absolute; left:0; top:25px; z-index: 99;
+    }
+    .pop_con p { margin:6px 0;}
+    </style>
+</head>
+<body>
+<div class="posiBox"><h3>Para1</h3>
+    <p>Before you install this release, be sure to refer to the following: </p>
+    <a href="#prerequisitesCon" class="pop_link">Verify the integrity of the download</a>
+    <div class="pop_con" id="prerequisitesCon">
+        <p>To ensure the integrity of your downloaded software, the Installer generates an MD5 Checksum value for each platform-specific software installation file. You can use this value to verify that a downloaded file is intact. After you click on the software download link and launch the Installer page, you can see the MD5 Checksum value listed on the page. Each value listed is unique. After you finish downloading the software from the Installer page, you can calculate the MD5 Checksum value on your computer and compare it to the value on the Installer page. If the downloaded file is intact, the values will match.</p>
+    </div>
+</div>
+
+
+<div class="posiBox"><h3>Para2</h3>
+    <p>The installation process  allows you to install directly from this website or you can download the installation files directly to your system. We recommends you download the installation files to your system.</p>
+    <a href="#instructionsCon" class="pop_link">Instructions on downloading the installation files to your system.</a> 
+    <div class="pop_con" id="instructionsCon">
+        <h4>Description:</h4>
+        <p>Description details.</p>
+        <h4>Solution:</h4>
+        <p>Solution details1.</p>
+        <p>Solution details2.</p>
+    </div>
+</div>
+
+<div class="posiBox"><h3>Para3</h3>
+    <a href="#troubleCon" class="pop_link">Click here if the file does not download completely.</a>
+    <div class="pop_con" id="troubleCon">
+        <p>To simplify the download process, the software is contained in a .zip file or .exe file.</p>
+        <h4>To download this file</h4>
+        <ol>
+            <li>Click download link contained in the answer.</li>
+            <li>On the File Download window, click Save.</li>
+            <li>Browse to a location where you want to save the file. Be sure to note the location where you save the file as you will need this to install the software.</li>
+            <li>Click Save.The file begins to download to the selected location. The amount of time it takes to save the file depends on the speed of your Internet connection.</li>
+        </ol>
+
+    </div>
+</div>
+
+
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.6.1.min.js"></script>
+<script type="text/javascript">
+jQuery(function($) {
+   var linkName = 'pop_link',
+       $conBox = $('.pop_con');
+    
+   $('.'+linkName).click(function(e) {
+       e.preventDefault();
+       var getID = function(href) {
+               return href.substr(href.lastIndexOf('#'));
+           },
+           _id = getID(this.href);
+
+       $(_id).fadeIn(function() {
+           $('body').bind('click', function(e) {
+               var _target = e.target;
+               if(_target.className === linkName) {   //用于直接点击其他link时
+                   $('body').unbind('click');
+
+                   var __id = getID(_target.href);
+                   $(__id).fadeIn();
+                   $conBox.not(__id).fadeOut(200);
+                   return;
+               }
+
+               if($conBox.is(':visible')) {     //用于直接点击后关闭时
+                   $conBox.fadeOut(200, function() {
+                       $('body').unbind('click');
+                   });
+               }
+           });
+       });
+   });
+});
+</script>
+
+</body>
+</html>
